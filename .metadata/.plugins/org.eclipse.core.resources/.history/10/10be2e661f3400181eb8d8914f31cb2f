@@ -1,0 +1,12 @@
+package com.nordea.gol.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class GameOfLifeController {
+	
+	@RequestMapping()
+	public String test() {
+		
+	}
+}

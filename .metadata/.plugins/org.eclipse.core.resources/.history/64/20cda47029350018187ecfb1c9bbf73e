@@ -1,0 +1,20 @@
+package com.nordea.gol.controller;
+
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
+
+//@RestController
+@Component
+public class GameOfLifeBean {
+/*
+	@RequestMapping("/welcome")
+	public ModelAndView firstPage() {
+		return new ModelAndView("welcome");
+	} */
+	
+	   public void sayHello(){
+		      System.out.println("Hello Spring Boot!");
+		   }
+
+}

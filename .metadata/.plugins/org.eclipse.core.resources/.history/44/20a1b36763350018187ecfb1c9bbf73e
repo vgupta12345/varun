@@ -1,0 +1,20 @@
+package com.nordea.gol.constants;
+
+public class GameOfLifeConstants {
+
+	private GameOfLifeConstants(){
+		
+	}
+	
+	public static final String INPUT_FILE = "gameOfLife.txt";
+	public static final String LIFE = ".";
+	public static final String DEATH = "X";
+
+
+	public static final String NAME_OF_APPLICATION = "Conway's Game";
+	public static final int NUMBER_OF_ROWS = 30;
+	public static final int NUMBER_OF_COLUMNS = 30;
+	public static final int TIME_LAG = 200;
+	public static final String GREEN_COLOR = "#01a900";
+	
+}

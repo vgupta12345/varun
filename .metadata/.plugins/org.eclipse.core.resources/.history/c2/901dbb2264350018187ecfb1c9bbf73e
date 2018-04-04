@@ -1,0 +1,81 @@
+package com.nordea.gol.utils;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import com.nordea.gol.constants.GameOfLifeConstants;
+
+public final class GameOfLifeUtils {
+
+	public static String[][] generateCellMatrix(List<String> inputList) {
+
+		String[][] cellMatrixGrid = new String[GameOfLifeConstants.NUMBER_OF_ROWS][GameOfLifeConstants.NUMBER_OF_COLUMNS];
+
+
+			for (int i = 0; i < inputList.size(); i++) {
+
+				String[] myStringArray = inputList.get(i).split(" ");
+
+				for (int j = 0; j < myStringArray.length; j++) {
+					cellMatrixGrid[i][j] = myStringArray[j];
+
+				}
+			}
+
+		return cellMatrixGrid;
+
+	}
+	
+
+	public static String[][] copyGrid(String[][] grid) {
+		String[][] tempGrid = new String[grid.length][grid[0].length];
+
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				tempGrid[i][j] = grid[i][j];
+			}
+		}
+
+		return tempGrid;
+	}
+
+
+
+	public static void clearScreen() {
+		for (int i = 0; i < 10; i++)
+			System.out.println();
+	}
+
+	public static void printCellMatrix(String[][] cellMatrix) {
+		for (int i = 0; i < cellMatrix.length; i++) {
+			for (int j = 0; j < cellMatrix[i].length; j++) {
+				System.out.print("  " + cellMatrix[i][j] + "  ");
+			}
+
+			System.out.println();
+		}
+	}
+	
+	public static List<String> readInputFile() {
+		String fileName = GameOfLifeConstants.INPUT_FILE;
+		List<String> list = new ArrayList<>();
+
+		// read file into stream, try-with-resources
+		try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+			// list = stream
+			// .filter(line -> !line.startsWith("line3"))
+			// .collect(Collectors.toList());
+			list = stream.collect(Collectors.toList());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+}

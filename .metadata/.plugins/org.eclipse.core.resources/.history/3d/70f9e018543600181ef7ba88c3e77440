@@ -1,0 +1,17 @@
+/*
+ * 
+ */
+package com.nordea.gol.service;
+
+/**
+ * The Interface MatrixGenerationService : to generate a 2/2 cell matrix by reading through an input file
+ */
+public interface MatrixGenerationService {
+
+	/**
+	 * Generate cell matrix.
+	 *
+	 * @return the string[][]
+	 */
+	public String[][] generateCellMatrix();
+}

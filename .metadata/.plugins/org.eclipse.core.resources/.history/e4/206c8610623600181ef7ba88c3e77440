@@ -1,0 +1,131 @@
+/*
+ * 
+ */
+package com.nordea.gol;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+import com.nordea.gol.constants.GameOfLifeConstants;
+import com.nordea.gol.service.MatrixGenerationService;
+import com.nordea.gol.service.NextGenerationService;
+import com.nordea.gol.utils.GameOfLifeUtils;
+
+@SpringBootApplication
+public class GameOfLifeApplication implements GameOfLifeConstants {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(GameOfLifeApplication.class);
+	
+	//Comments
+	//Break into smaller methods + Code cleanup
+	//Apply java docs
+	
+	//Autowiring
+	
+	//Think Design patterns
+
+
+	public static void main(String[] args) {
+		//SpringApplication.run(GameOfLifeApplication.class, args);
+		ApplicationContext ctx = SpringApplication.run(GameOfLifeApplication.class, args);
+
+		int maxGeneration = getMaxGeneration();
+		String[][] cellMatrix = null;
+		int currentGeneration = 0;
+
+		try {
+			
+			List<String> inputMatrixList = readInputFile();
+			//If input file cannot be read, then return null and nothing will happen.  else proceed with generation of cell matrix
+			if(inputMatrixList.size() == 0)
+				return;
+			
+			MatrixGenerationService matrixGenerationService = ctx.getBean(MatrixGenerationService.class);
+			cellMatrix = matrixGenerationService.generateCellMatrix(inputMatrixList);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			LOGGER.error("NUMBER_OF_ROWS or NUMBER_OF_COLUMNS does not match file contents. Please specify correct values of NUMBER_OF_ROWS and NUMBER_OF_COLUMNS");
+			return;
+		}
+
+		// Check so that maxGenerations are not exceeded
+		while (currentGeneration < maxGeneration) {
+			GameOfLifeUtils.printCellMatrix(cellMatrix);
+			LOGGER.info("  Current generation   " + (++currentGeneration));
+
+			// Get the new generation matrix
+			NextGenerationService nextGenerationService = ctx.getBean(NextGenerationService.class);
+			String[][] nextGenGrid = nextGenerationService.nextGenerationMatrix(cellMatrix);
+
+			// copy grid with new generations to the one previously created
+			cellMatrix = GameOfLifeUtils.copyGrid(nextGenGrid);
+		}
+
+	}
+	
+	/**
+	 * Read input file.
+	 *
+	 * @return the list
+	 */
+	private static List<String> readInputFile() {
+		String fileName = INPUT_FILE;
+		List<String> list = new ArrayList<>();
+
+		// Read file into stream
+		try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+			list = stream.collect(Collectors.toList());
+		} catch (IOException fileReadException) {
+			LOGGER.error("IO exception during file read ", fileReadException);
+		}
+		return list;
+	}
+
+
+
+	/**
+	 * Gets the max generation.
+	 *
+	 * @return the max generation
+	 */
+	private static int getMaxGeneration() {
+		
+		// create a scanner so we can read the command-line input
+		Scanner scanner = null;
+		int maxGeneration=0;
+
+		try {
+			scanner = new Scanner(System.in);
+			// prompt for the max number of generations
+			LOGGER.info("Enter maximum number of generations: ");
+			// get their input as max number of generations
+			maxGeneration = scanner.nextInt();
+			
+		}catch(IllegalArgumentException  illegalArgumentException ) {
+			LOGGER.error("Please enter a number as maximum number of generations: " + illegalArgumentException);
+			
+		}catch(InputMismatchException  inputMismatchException ) {
+			LOGGER.error("Please enter a number as maximum number of generations: " + inputMismatchException);
+			
+		}
+		finally {
+			if(scanner!=null)
+		        scanner.close();
+		}
+		
+
+		return maxGeneration;
+	}
+}

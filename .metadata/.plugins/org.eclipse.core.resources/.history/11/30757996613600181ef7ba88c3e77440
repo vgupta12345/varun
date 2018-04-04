@@ -1,0 +1,35 @@
+package com.nordea.gol;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.nordea.gol.service.NextGenerationService;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class NextGenerationServiceTests {
+
+	@Autowired
+	private NextGenerationService nextGenerationService;
+
+	@Test
+	public void nextGenerationMatrix() {
+		
+		List<String> list = new ArrayList<>();
+		list.add("X X X X X X");
+		list.add("X X X X X X");
+		list.add("X . . . X X");
+		list.add("X X X X X X");
+		list.add("X X X X X X");
+		list.add("X X X X X X");
+		String[][] cellMatrixGrid = matrixGenerationService.generateCellMatrix(list);
+
+	}
+
+}

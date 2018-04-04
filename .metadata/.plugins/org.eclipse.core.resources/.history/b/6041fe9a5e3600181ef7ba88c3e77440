@@ -1,0 +1,17 @@
+package com.nordea.gol.service;
+
+/**
+ * The Interface NextGenerationService.
+ */
+public interface NextGenerationService {
+
+	/**
+	 * Next generation matrix.
+	 *
+	 * @param grid
+	 *            the grid
+	 * @return the string[][]
+	 */
+	public String[][] nextGenerationMatrix(String[][] grid);
+
+}

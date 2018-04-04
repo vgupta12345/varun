@@ -1,0 +1,7 @@
+package com.nordea.gol.service;
+
+public interface NextGenerationService {
+
+	public String[][] nextGenerationMatrix(String[][] grid);
+
+}

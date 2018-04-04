@@ -1,0 +1,24 @@
+package com.nordea.gol.constants;
+
+
+/**
+ * The Interface GameOfLifeConstants having all constants defined.
+ */
+public interface GameOfLifeConstants {
+
+	/** The Constant INPUT_FILE. */
+	String INPUT_FILE = "gameOfLife.txt";
+	
+	/** The Constant LIFE. */
+	String LIFE = ".";
+	
+	/** The Constant DEATH. */
+	String DEATH = "X";
+	
+	/** The Constant NUMBER_OF_ROWS. */
+	int NUMBER_OF_ROWS = 6;
+	
+	/** The Constant NUMBER_OF_COLUMNS. */
+	int NUMBER_OF_COLUMNS = 6;
+
+}
