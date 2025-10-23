@@ -1,6 +1,0 @@
-package com.nordea.gol.service;
-
-public interface MatrixGenerationService {
-
-	public String[][] generateCellMatrix();
-}

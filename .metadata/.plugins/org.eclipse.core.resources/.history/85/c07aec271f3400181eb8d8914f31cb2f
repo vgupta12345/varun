@@ -1,5 +1,0 @@
-package com.nordea.gol.controller;
-
-public class GameOfLifeController {
-
-}

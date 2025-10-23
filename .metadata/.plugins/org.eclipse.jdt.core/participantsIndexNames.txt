@@ -1,5 +1,0 @@
-INDEX VERSION 1.130
-C:\workspace-sts\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1837596061.index
-\GameOfLife\src\main\java
-C:\workspace-sts\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3132571661.index
-\GameOfLife\src\main\java

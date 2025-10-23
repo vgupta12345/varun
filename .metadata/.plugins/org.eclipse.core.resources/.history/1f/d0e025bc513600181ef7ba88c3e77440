@@ -1,8 +1,0 @@
-package com.nordea.gol.service;
-
-import java.util.List;
-
-public interface MatrixGenerationService {
-
-	public String[][] generateCellMatrix(List<String> inputList);
-}
